@@ -6,7 +6,7 @@ import { POPOVER_DATA } from '../../popover/PopoverService';
   selector: 'app-singleselect',
   template: `
     <p>Single Select! {{message}}</p>
-    <button (click)="close()">Close IT</button>
+    <button (click)="close()">Close Editor</button>
   `,
   styles: ['']
 })
@@ -24,6 +24,10 @@ export class SingleSelectComponent {
   }
 
   close() {
-    this.popoverRef.close([1,3,3]);
+    this.data.selectedValue = new Date().getTime();
+    const teams = ['Team A', 'Team B', 'Team C'];
+    const random = Math.floor(Math.random() * teams.length);
+    this.data.selectedValue = teams[random];
+    this.popoverRef.close(this.data);
   }
 }
