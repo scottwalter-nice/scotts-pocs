@@ -1,0 +1,16 @@
+<div class="qb-wrapper">
+
+  <ng-template #viewContainerRef></ng-template>
+  <!--
+  <div *ngFor="let definition of queryComponentDefinition">
+    <button [attr.query-component]="definition.componentName" (click)="showPopover($event.target)">{{definition.description}}</button>
+  </div>
+-->
+
+  <div>
+    <select (change)="onChange($event)">
+      <option>Select Query Type</option>
+      <option *ngFor="let c of queryComponentDefinitions" [value]="c.id">{{c.description}}</option>
+    </select>
+  </div>
+</div>
