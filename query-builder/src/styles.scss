@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: Lato;
+}
+
+@import "~@angular/cdk/overlay-prebuilt.css";
+
+.custom-backdrop {
+  background: rgba(128, 0, 128, 0.2);
+}
+
+.custom-panel p1-popover {
+  border-radius: 16px;
+  background: #2797d8;
+
+  .arrow {
+    border-radius: 5px;
+  }
+}
