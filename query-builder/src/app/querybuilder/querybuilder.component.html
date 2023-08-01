@@ -1,11 +1,5 @@
 <div class="qb-wrapper">
-
   <ng-template #viewContainerRef></ng-template>
-  <!--
-  <div *ngFor="let definition of queryComponentDefinition">
-    <button [attr.query-component]="definition.componentName" (click)="showPopover($event.target)">{{definition.description}}</button>
-  </div>
--->
 
   <div>
     <select (change)="onChange($event)">
@@ -14,3 +8,6 @@
     </select>
   </div>
 </div>
+
+<hr>
+{{ model | json }}

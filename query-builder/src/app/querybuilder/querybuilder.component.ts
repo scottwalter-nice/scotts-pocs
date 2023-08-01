@@ -12,49 +12,67 @@ export class QuerybuilderComponent implements OnInit{
   popoverService = inject(PopoverService);
   selectedValue: any;
   allComponets = COMPONENT_REGISTRY;
-
   chipRefs:ComponentRef<unknown>[] = [];
-
   appRef = inject(ApplicationRef);
 
   @ViewChild("viewContainerRef", { read: ViewContainerRef }) vcr!: ViewContainerRef;
-
   @ViewChildren(QuerychipComponent) queryChipChildren!: QueryList<QuerychipComponent>;
 
-
-  constructor(private elRef:ElementRef) {
-  }
+  constructor(private elRef:ElementRef) {}
 
   @Input()
   queryComponentDefinitions!: any[];
+
+  @Input()
+  model!: any;
 
   ngOnInit(): void {
     console.debug('component definitions', this.queryComponentDefinitions);
   }
 
   onChange(target: any) {
-    console.log('BBBB', target?.target?.value);
     if (target?.target?.value === 'Select Query Type') {
       return;
     }
 
-    const componentId = parseInt(target?.target?.value);
+    const componentId = target?.target?.value;
     const queryComponentDefinition= this.queryComponentDefinitions.find(item  => item.id === componentId)
     const compRef = COMPONENT_REGISTRY.find( item => item.name === queryComponentDefinition.componentName);
     this.addChip(QuerychipComponent, queryComponentDefinition, compRef);
   }
 
   addChip(component: any, queryComponentDefinition:any, compRef:any) {
+    console.log('RED', queryComponentDefinition);
     const ref = this.vcr.createComponent(component);
     ref.setInput('name', 'scott' + new Date().getTime());
+    ref.setInput('model', this.model.find((item:any) => item.filterId === queryComponentDefinition.id));
+
+
+    const modelValue = this.model.find((item:any) => item.filterId === queryComponentDefinition.id);
+    ref.setInput('model', modelValue);
+    // if (modelValue) {
+    //   ref.setInput('model', modelValue.selectedValue);
+    // } else {
+    //   ref.setInput('model', 'no model value');
+    // }
+
     ref.setInput('definition', {
         componentName: compRef.name,
         description: queryComponentDefinition.description
       }
     );
 
+
+
     this.chipRefs.push(ref);
     ref.location.nativeElement.setAttribute("refIndex","" + (new Date().getTime()));
+
+    (ref.instance as QuerychipComponent).editorValueChanged.subscribe((value) => {
+      console.log('BINGO', value);
+
+      const modelValue = this.model.find((item: any) => item.filterId === value.filterId);
+      modelValue.selectedItem = value.selectedItem;
+    });
 
     (ref.instance as QuerychipComponent).deleteChipEvent.subscribe((index) => {
       for (const value of this.chipRefs) {
@@ -67,6 +85,14 @@ export class QuerybuilderComponent implements OnInit{
 
       // this.vcr.remove(index);)
     });
+
+    //TODO probably don't need to force a change detection on entire app
     this.appRef.tick();
+  }
+
+
+
+  parentFun() {
+    alert('parent component function.');
   }
 }

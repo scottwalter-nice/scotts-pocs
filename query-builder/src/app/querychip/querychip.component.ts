@@ -24,13 +24,17 @@ export class QuerychipComponent {
   @Input()
   definition!: any;
 
+  @Input()
+  model!: any;
+
   @Output() deleteChipEvent: EventEmitter<any> = new EventEmitter();
+
+  @Output() editorValueChanged: EventEmitter<any> = new EventEmitter();
 
   constructor(private elRef:ElementRef) {
   }
 
   deleteChip() {
-    console.log('RED', this.elRef.nativeElement);
     this.deleteChipEvent.emit(parseInt(this.elRef.nativeElement.getAttribute('refindex')));
   }
 
@@ -43,11 +47,12 @@ export class QuerychipComponent {
     if (target) {
       if (compRef) {
         this.popoverService.open(compRef?.component, target as HTMLElement, {
-          data: 'Foo'
+          data: this.model
         })
         .afterClosed()
         .subscribe(result => {
-          console.log(`Closed with ${result}`);
+          console.log(`Closed with ${result} for ${this.model}`);
+          this.editorValueChanged.emit(result);
         });
       }
     }

@@ -4,16 +4,29 @@ import { COMPONENT_REGISTRY } from './component-registry';
 @Component({
   selector: 'app-root',
   template: `
-    <app-querybuilder [queryComponentDefinitions]="queryComponents"></app-querybuilder>
+    <app-querybuilder [queryComponentDefinitions]="queryComponents" [model]="model"></app-querybuilder>
 
   `,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
 
+  model = [
+    {
+      filterId: 'teams',
+      selectedValue: 100
+    },
+    {
+      filterId: 'users',
+      selectedValue: 200
+    }
+
+  ]
+
   queryComponents = [
     {
-      id: 0,
+      // id: 0,
+      id: 'teams',
       componentName: 'singleSelect',
       description: 'Teams',
       componentConfig: {
@@ -21,8 +34,8 @@ export class AppComponent {
       }
     },
     {
-      id: 1,
-      key: "users",
+      // id: 1,
+      id: 'users',
       componentName: 'multiSelect',
       description: 'Users'
     }
