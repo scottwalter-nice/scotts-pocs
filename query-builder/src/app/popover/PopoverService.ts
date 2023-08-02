@@ -109,33 +109,27 @@ export class PopoverService {
     });
 
     const popoverRef = new PopoverRef(overlayRef, positionStrategy, popoverConfig);
+    const portalInjector  = Injector.create({
+      parent: this.injector,
+      providers: [
+          { provide: POPOVER_DATA, useValue: config.data },
+          { provide: PopoverRef, useValue: popoverRef }
+      ]
+    });
+
     const popover = overlayRef.attach(new ComponentPortal(
       PopoverComponent,
       null,
-      new PortalInjector(
-        this.injector,
-        new WeakMap<any, any>([
-          [PopoverRef, popoverRef]
-        ])
-      )
+      portalInjector
     )).instance;
 
     popover.attachComponentPortal(
       new ComponentPortal(
         componentOrTemplate,
         null,
-
-        // this.injector
-        new PortalInjector(
-          this.injector,
-          new WeakMap<any, any>([
-            [POPOVER_DATA, config.data],
-            [PopoverRef, popoverRef]
-          ])
-        )
+        portalInjector
       )
     );
-
 
     return popoverRef;
   }
