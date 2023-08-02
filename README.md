@@ -1,6 +1,6 @@
 # Scott's PoCs
 
-This is my one stop shop for proof of concepts.  You won't find anything here in the root.   You will need to go into a subdirectory
+This is my one stop shop for proof of concepts.  You won't find anything here in the root.   You will need to go into a subdirectory to see the poc.
 
 ## Current Poc's
 
