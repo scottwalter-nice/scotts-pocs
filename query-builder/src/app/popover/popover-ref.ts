@@ -15,18 +15,18 @@ export class PopoverRef<T = any> {
               public config: PopoverConfig) {
     if (!config.disableClose) {
       this.overlayRef.backdropClick().subscribe(() => {
-        this.close();
+        this.close(false);
       });
 
       this.overlayRef.keydownEvents().pipe(
         filter(event => event.key === 'Escape')
       ).subscribe(() => {
-        this.close();
+        this.close(false);
       });
     }
   }
 
-  close(dialogResult?: T): void {
+  close(dialogResult?: any): void {
     if (dialogResult) {
       this.afterClosedSubject.next(dialogResult);
     }
