@@ -13,52 +13,19 @@ import { PopoverRef } from './popover-ref';
   selector: 'p1-popover',
   template: `
     <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
-    <ng-container #portalOutlet></ng-container>
     <div class="arrow" popoverArrow></div>
-
-    <!-- [style.left.px]="arrowLeft"
-      [style.bottom.px]="arrowBottom"
-      [style.right.px]="arrowRight" -->
   `,
   styleUrls: ['./popover.component.scss']
 })
 export class PopoverComponent implements AfterViewInit {
 
   selectedPortal!: ComponentPortal<any>;
-  @ViewChild(CdkPortalOutlet)
-  portalOutlet!: CdkPortalOutlet;
 
-  // @ViewChild(CdkPortalOutlet) portalOutlet!: CdkPortalOutlet;
-
-  constructor() {
-  }
-
-  // // @ViewChild(CdkPortalOutlet, { static: false }) portalOutlet!: CdkPortalOutlet;
-
-  // selectedPortal!: CdkPortalOutlet;
-
-
-  // attachComponentPortal<T>(componentPortal: ComponentPortal<any>): ComponentRef<T> {
-  //   console.log('q1', this.selectedPortal);
-  //   // console.log('RRRR', this.portalOutlet);
-  //   return this.selectedPortal.attachComponentPortal(componentPortal);
-  // }
-
-  // attachTemplatePortal<C>(portal: TemplatePortal<C>): EmbeddedViewRef<C> {
-  //   return this.selectedPortal.attachTemplatePortal(portal);
-  // }
-
+  constructor() {}
 
   attachComponentPortal<T>(componentPortal: ComponentPortal<any>) {
     this.selectedPortal = componentPortal;
   }
 
-  //   attachComponentPortal<T>(componentPortal: ComponentPortal<any>): ComponentRef<T> {
-  //   console.log('RRRR', this.portalOutlet);
-  //   return this.portalOutlet.attachComponentPortal(componentPortal);
-  // }
-
-
-  ngAfterViewInit() {
-  }
+  ngAfterViewInit() {}
 }
