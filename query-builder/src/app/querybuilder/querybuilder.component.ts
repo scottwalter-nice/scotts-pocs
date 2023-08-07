@@ -42,11 +42,12 @@ export class QuerybuilderComponent implements OnInit{
   }
 
   addChip(component: any, queryComponentDefinition:any, compRef:any) {
-    console.log('RED', queryComponentDefinition);
+    console.log('addChip', queryComponentDefinition);
     const ref = this.vcr.createComponent(component);
     ref.setInput('name', 'scott' + new Date().getTime());
     ref.setInput('model', this.model.find((item:any) => item.filterId === queryComponentDefinition.id));
 
+    this.model.push({ filterId: queryComponentDefinition.id });
 
     const modelValue = this.model.find((item:any) => item.filterId === queryComponentDefinition.id);
     ref.setInput('model', modelValue);
@@ -66,6 +67,7 @@ export class QuerybuilderComponent implements OnInit{
 
     this.chipRefs.push(ref);
     ref.location.nativeElement.setAttribute("refIndex","" + (new Date().getTime()));
+    ref.location.nativeElement.setAttribute("data-filter-id",queryComponentDefinition.id);
 
     (ref.instance as QuerychipComponent).editorValueChanged.subscribe((value) => {
       console.log('BINGO', value);
@@ -77,8 +79,17 @@ export class QuerybuilderComponent implements OnInit{
     (ref.instance as QuerychipComponent).deleteChipEvent.subscribe((index) => {
       for (const value of this.chipRefs) {
         const refIndex = value.location.nativeElement.getAttribute('refindex');
+        const filterId = value.location.nativeElement.getAttribute('data-filter-id');
         if (parseInt(index)===parseInt(refIndex)) {
+          console.log(refIndex);
           value.destroy();
+
+          const indexToRemove = this.model.findIndex( (el: any) => el.filterId === filterId );
+          console.log(indexToRemove);
+          if (indexToRemove > -1) {
+            this.model.splice(indexToRemove, 1)
+          }
+
           break;
         }
       }
