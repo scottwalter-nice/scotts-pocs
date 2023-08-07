@@ -12,6 +12,7 @@ import { QuerybuilderComponent } from './querybuilder/querybuilder.component';
 import { FormsModule } from '@angular/forms';
 import { QuerychipComponent } from './querychip/querychip.component';
 import { MultiSelectComponent } from './editors/multiselect/multiseselect.component';
+import { DropdownModule } from 'nice-solaris-ngx/dropdown';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MultiSelectComponent } from './editors/multiselect/multiseselect.compon
     OverlayModule,
     PortalModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,9 +9,11 @@ import { PopoverService } from '../popover/PopoverService';
       <div class="chip-title">{{label}}</div>
       <div class="chip-operator">Operator</div>
       <div class="chip-value">
-          <span [attr.query-component]="definition.componentName" (click)="showPopover($event.target)">{{model.selectedValue}}</span>
+          <span [attr.query-component]="definition.componentName" (click)="showPopover($event.target)">
+            <ng-container *ngIf="model">{{model.selectedValue}}</ng-container>
+           ⌄</span>
       </div>
-      <button (click)="deleteChip()">X</button>
+      <button (click)="deleteChip()">×</button>
     </div>
   `,
   styles: [`
@@ -47,6 +49,7 @@ import { PopoverService } from '../popover/PopoverService';
       align-items: center;
       gap: 4px;
       background: var(--global-state-inactive-text, #3F5C69);
+      min-width: 20px;
     }
   `]
 })

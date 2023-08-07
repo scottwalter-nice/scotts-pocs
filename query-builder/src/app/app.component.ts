@@ -11,6 +11,7 @@ import { COMPONENT_REGISTRY } from './component-registry';
 })
 export class AppComponent {
 
+  /*
   model = [
     {
       filterId: 'teams',
@@ -21,7 +22,9 @@ export class AppComponent {
       selectedValue: 200
     }
 
-  ]
+  ];
+  */
+  model = [];
 
   queryComponents = [
     {
@@ -30,7 +33,11 @@ export class AppComponent {
       componentName: 'singleSelect',
       description: 'Teams',
       componentConfig: {
-        items: []
+        items: [
+          { value: 'a1a1a1', label: 'Team A' },
+          { value: 'b2b2b2', label: 'Team B' },
+          { value: 'c3c3c3', label: 'Team C' }
+        ]
       }
     },
     {
