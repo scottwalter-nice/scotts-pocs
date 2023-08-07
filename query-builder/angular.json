@@ -34,7 +34,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/nice-solaris-ngx/src/styles/sol-core.scss",
+              "node_modules/nice-solaris-ngx/src/assets/typefaces.css"
             ],
             "scripts": []
           },
@@ -97,7 +99,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/nouislider/dist/nouislider.min.css",
+              "node_modules/nice-solaris-ngx/src/styles/sol-core.scss",
+              "node_modules/nice-solaris-ngx/src/assets/typefaces.css"
             ],
             "scripts": []
           }
