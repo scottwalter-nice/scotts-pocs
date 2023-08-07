@@ -3,7 +3,7 @@
 
   <div>
     <select (change)="onChange($event)">
-      <option>Select Query Type</option>
+      <option value="add">+ Add Criteria</option>
       <option *ngFor="let c of queryComponentDefinitions" [value]="c.id">{{c.description}}</option>
     </select>
   </div>

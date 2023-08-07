@@ -30,15 +30,18 @@ export class QuerybuilderComponent implements OnInit{
     console.debug('component definitions', this.queryComponentDefinitions);
   }
 
-  onChange(target: any) {
-    if (target?.target?.value === 'Select Query Type') {
+  onChange(event: any) {
+    if (event?.target?.value === 'add') {
       return;
     }
 
-    const componentId = target?.target?.value;
+    const componentId = event?.target?.value;
     const queryComponentDefinition= this.queryComponentDefinitions.find(item  => item.id === componentId)
     const compRef = COMPONENT_REGISTRY.find( item => item.name === queryComponentDefinition.componentName);
     this.addChip(QuerychipComponent, queryComponentDefinition, compRef);
+
+    event.target.value = 'add';
+
   }
 
   addChip(component: any, queryComponentDefinition:any, compRef:any) {

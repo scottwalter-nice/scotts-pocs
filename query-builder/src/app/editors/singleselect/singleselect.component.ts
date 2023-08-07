@@ -58,9 +58,11 @@ export class SingleSelectComponent {
   }
 
   change() {
-    //if (this.selection && this.selection.length) {
-    //  this.data.selectedValue = this.selection[0];
-    //}
-    this.data.selectedValue = this.selection;
+    if (this.selection && this.selection.length) {
+      this.data.selectedValue = this.selection[0];
+    } else {
+      this.data.selectedValue = undefined;
+    }
+    this.popoverRef.close();
   }
 }
