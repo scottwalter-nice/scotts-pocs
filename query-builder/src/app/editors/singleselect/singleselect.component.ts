@@ -12,7 +12,6 @@ import { DropdownComponent } from 'nice-solaris-ngx/dropdown';
     <sol-dropdown
         ariaLabel="test"
         ariaLabelledBy="other"
-        mode="inline"
         [options]="teams"
         optionsValue="value"
         optionsLabel="label"
@@ -58,8 +57,6 @@ export class SingleSelectComponent {
   }
 
   change() {
-    if (this.selection && this.selection.length) {
-      this.data.selectedValue = this.selection[0];
-    }
+    this.data.selectedValue = this.selection;
   }
 }
