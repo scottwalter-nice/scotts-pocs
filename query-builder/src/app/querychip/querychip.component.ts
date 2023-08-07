@@ -66,7 +66,7 @@ export class QuerychipComponent implements OnChanges {
   definition!: any;
 
   @Input()
-  model: any;
+  model!: any;
 
   @Output() deleteChipEvent: EventEmitter<any> = new EventEmitter();
 
