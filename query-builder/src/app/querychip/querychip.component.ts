@@ -10,7 +10,7 @@ import { PopoverService } from '../popover/PopoverService';
       <div class="chip-operator">Operator</div>
       <div class="chip-value">
           <span [attr.query-component]="definition.componentName" (click)="showPopover($event.target)">
-            <ng-container *ngIf="model">{{model.selectedValue}}</ng-container>
+            <ng-container *ngIf="model">{{currentSelection | json}}</ng-container>
            ⌄</span>
       </div>
       <button (click)="deleteChip()">×</button>
@@ -57,6 +57,8 @@ export class QuerychipComponent implements OnChanges {
 
   popoverService = inject(PopoverService);
 
+  currentSelection!: any;
+
   label!: string;
 
   @Input()
@@ -73,14 +75,12 @@ export class QuerychipComponent implements OnChanges {
   @Output() editorValueChanged: EventEmitter<any> = new EventEmitter();
 
   constructor(private elRef:ElementRef) {
-    console.log('RRRRR', this.definition);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
+    console.log('ngOnChange', changes);
 
     if (changes['definition'].currentValue) {
-      console.log('CCCC');
       this.label = changes['definition'].currentValue.description;
     }
   }
@@ -97,15 +97,25 @@ export class QuerychipComponent implements OnChanges {
     const compRef = COMPONENT_REGISTRY.find( item => item.name === componentName);
     if (target) {
       if (compRef) {
-        this.popoverService.open(compRef?.component, target as HTMLElement, {
+        const popoverRef = this.popoverService.open(compRef?.component, target as HTMLElement, {
           data: this.model
-        })
-        .afterClosed()
+        });
+
+        popoverRef.selectionChangedSubject.subscribe(value => {
+          this.currentSelection = value;
+        });
+
+        popoverRef.afterClosed()
         .subscribe(result => {
-          console.log(`Closed with ${result} for ${this.model}`);
-          this.editorValueChanged.emit(result);
+          if (typeof result === 'object' && result !== null) {
+            const cloneResult = Object.assign({}, result);
+            cloneResult.filterId = this.definition.id;
+            this.editorValueChanged.emit(cloneResult);
+          } else {
+            this.editorValueChanged.emit({value: result, filterId: this.definition.id});
+          }
         });
       }
     }
-}
+  }
 }

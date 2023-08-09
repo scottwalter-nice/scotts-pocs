@@ -2,6 +2,7 @@ import { ApplicationRef, Component, ComponentRef, ElementRef, Input, OnInit, Que
 import { COMPONENT_REGISTRY } from '../component-registry';
 import { PopoverService } from '../popover/PopoverService';
 import { QuerychipComponent } from '../querychip/querychip.component';
+import { query } from '@angular/animations';
 
 @Component({
   selector: 'app-querybuilder',
@@ -42,7 +43,6 @@ export class QuerybuilderComponent implements OnInit{
   }
 
   addChip(component: any, queryComponentDefinition:any, compRef:any) {
-    console.log('addChip', queryComponentDefinition);
     const ref = this.vcr.createComponent(component);
     ref.setInput('name', 'scott' + new Date().getTime());
     ref.setInput('model', this.model.find((item:any) => item.filterId === queryComponentDefinition.id));
@@ -51,15 +51,11 @@ export class QuerybuilderComponent implements OnInit{
 
     const modelValue = this.model.find((item:any) => item.filterId === queryComponentDefinition.id);
     ref.setInput('model', modelValue);
-    // if (modelValue) {
-    //   ref.setInput('model', modelValue.selectedValue);
-    // } else {
-    //   ref.setInput('model', 'no model value');
-    // }
 
     ref.setInput('definition', {
         componentName: compRef.name,
-        description: queryComponentDefinition.description
+        description: queryComponentDefinition.description,
+        id: queryComponentDefinition.id
       }
     );
 
@@ -70,10 +66,11 @@ export class QuerybuilderComponent implements OnInit{
     ref.location.nativeElement.setAttribute("data-filter-id",queryComponentDefinition.id);
 
     (ref.instance as QuerychipComponent).editorValueChanged.subscribe((value) => {
-      console.log('BINGO', value);
-
       const modelValue = this.model.find((item: any) => item.filterId === value.filterId);
-      modelValue.selectedItem = value.selectedItem;
+      const clonedValue = Object.assign({}, value);
+      delete clonedValue.filterId;
+
+      modelValue.selectedItem = clonedValue;
     });
 
     (ref.instance as QuerychipComponent).deleteChipEvent.subscribe((index) => {
@@ -81,11 +78,9 @@ export class QuerybuilderComponent implements OnInit{
         const refIndex = value.location.nativeElement.getAttribute('refindex');
         const filterId = value.location.nativeElement.getAttribute('data-filter-id');
         if (parseInt(index)===parseInt(refIndex)) {
-          console.log(refIndex);
           value.destroy();
 
           const indexToRemove = this.model.findIndex( (el: any) => el.filterId === filterId );
-          console.log(indexToRemove);
           if (indexToRemove > -1) {
             this.model.splice(indexToRemove, 1)
           }

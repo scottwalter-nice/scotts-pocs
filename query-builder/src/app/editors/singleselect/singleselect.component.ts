@@ -57,6 +57,6 @@ export class SingleSelectComponent {
   }
 
   change() {
-    this.data.selectedValue = this.selection;
+    this.popoverRef.selectionChanged(this.selection);
   }
 }

@@ -5,24 +5,24 @@ import { POPOVER_DATA } from '../../popover/PopoverService';
 @Component({
   selector: 'app-multiselect',
   template: `
-    <p>Multi Select! {{message}}</p>
-    <button (click)="close()">Close Editor</button>
+    <p>Multi Select! {{selections }}</p>
+    <button (click)="updateValue()">Update Value</button>
   `,
   styles: ['']
 })
 export class MultiSelectComponent {
 
-  message!: string;
+  selections!: any;
+
 
   constructor(
     private popoverRef: PopoverRef<any>,
     @Optional() @Inject(POPOVER_DATA) public data?: any
   ) {
-    this.message = this.data;
   }
 
-  close() {
-    this.data.selectedValue = new Date().getTime();
-    this.popoverRef.close(this.data);
+  updateValue() {
+    this.selections = new Date().getTime();
+    this.popoverRef.selectionChanged(this.selections);
   }
 }

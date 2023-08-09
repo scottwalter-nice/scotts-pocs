@@ -9,30 +9,31 @@ import { PopoverConfig } from './popover-config';
  */
 export class PopoverRef<T = any> {
   private afterClosedSubject = new Subject<T>();
+  selectionChangedSubject = new Subject<T>();
+  private currentSelection!:any;
 
   constructor(private overlayRef: OverlayRef,
               private positionStrategy: FlexibleConnectedPositionStrategy,
               public config: PopoverConfig) {
     if (!config.disableClose) {
       this.overlayRef.backdropClick().subscribe(() => {
-        this.close(false);
+        this.close();
       });
 
       this.overlayRef.keydownEvents().pipe(
         filter(event => event.key === 'Escape')
       ).subscribe(() => {
-        this.close(false);
+        this.close();
       });
     }
   }
 
-  close(dialogResult?: any): void {
-    if (dialogResult) {
-      this.afterClosedSubject.next(dialogResult);
+  close(): void {
+    if (this.currentSelection) {
+      this.afterClosedSubject.next(this.currentSelection);
     }
 
     this.afterClosedSubject.complete();
-
     this.overlayRef.dispose();
   }
 
@@ -42,5 +43,10 @@ export class PopoverRef<T = any> {
 
   positionChanges(): Observable<ConnectedOverlayPositionChange> {
     return this.positionStrategy.positionChanges;
+  }
+
+  selectionChanged(value: any) {
+    this.currentSelection = value;
+    this.selectionChangedSubject.next(value);
   }
 }
