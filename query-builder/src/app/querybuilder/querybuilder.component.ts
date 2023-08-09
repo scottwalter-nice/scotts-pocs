@@ -55,7 +55,8 @@ export class QuerybuilderComponent implements OnInit{
     ref.setInput('definition', {
         componentName: compRef.name,
         description: queryComponentDefinition.description,
-        id: queryComponentDefinition.id
+        id: queryComponentDefinition.id,
+        componentConfig: queryComponentDefinition.componentConfig
       }
     );
 

@@ -40,9 +40,6 @@ export class SingleSelectComponent {
   placeholder: any;
   selection: any;
   teams = [
-    { value: 'a1a1a1', label: 'Team A' },
-    { value: 'b2b2b2', label: 'Team B' },
-    { value: 'c3c3c3', label: 'Team C' }
   ];
 
   static operator = [];
@@ -50,7 +47,10 @@ export class SingleSelectComponent {
   popoverRef:PopoverRef = inject(PopoverRef);
   data:any = inject(POPOVER_DATA);
 
-  constructor() {}
+  constructor() {
+    console.log('POPOVER_DATA', this.data);
+    this.teams = this.data.componentConfig.items;
+  }
 
   close() {
     this.popoverRef.close();

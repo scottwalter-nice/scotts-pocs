@@ -98,7 +98,10 @@ export class QuerychipComponent implements OnChanges {
     if (target) {
       if (compRef) {
         const popoverRef = this.popoverService.open(compRef?.component, target as HTMLElement, {
-          data: this.model
+          data: {
+            model: this.model,
+            componentConfig: this.definition.componentConfig
+          }
         });
 
         popoverRef.selectionChangedSubject.subscribe(value => {
