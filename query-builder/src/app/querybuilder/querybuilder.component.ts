@@ -91,9 +91,6 @@ export class QuerybuilderComponent implements OnInit{
 
       // this.vcr.remove(index);)
     });
-
-    //TODO probably don't need to force a change detection on entire app
-    this.appRef.tick();
   }
 
 
