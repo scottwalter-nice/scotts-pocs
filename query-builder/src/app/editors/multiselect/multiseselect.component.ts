@@ -1,4 +1,4 @@
-import { Component, Inject, Optional } from '@angular/core';
+import { Component, Inject, Optional, inject } from '@angular/core';
 import { PopoverRef } from '../../popover/popover-ref';
 import { POPOVER_DATA } from '../../popover/PopoverService';
 
@@ -13,13 +13,10 @@ import { POPOVER_DATA } from '../../popover/PopoverService';
 export class MultiSelectComponent {
 
   selections!: any;
+  popoverRef:PopoverRef = inject(PopoverRef);
+  data:any = inject(POPOVER_DATA);
 
-
-  constructor(
-    private popoverRef: PopoverRef<any>,
-    @Optional() @Inject(POPOVER_DATA) public data?: any
-  ) {
-  }
+  constructor() {}
 
   updateValue() {
     this.selections = new Date().getTime();

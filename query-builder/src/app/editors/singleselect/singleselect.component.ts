@@ -1,4 +1,4 @@
-import { Component, Inject, Input, Optional } from '@angular/core';
+import { Component, Inject, Input, Optional, inject } from '@angular/core';
 import { PopoverRef } from '../../popover/popover-ref';
 import { POPOVER_DATA } from '../../popover/PopoverService';
 import { ModalService } from 'nice-solaris-ngx/modal';
@@ -47,10 +47,10 @@ export class SingleSelectComponent {
 
   static operator = [];
 
-  constructor(
-    private popoverRef: PopoverRef,
-    @Optional() @Inject(POPOVER_DATA) public data?: any
-  ) { }
+  popoverRef:PopoverRef = inject(PopoverRef);
+  data:any = inject(POPOVER_DATA);
+
+  constructor() {}
 
   close() {
     this.popoverRef.close();
