@@ -8,8 +8,8 @@ import { PopoverConfig } from './popover-config';
  * Reference to a popover opened via the Popover service.
  */
 export class PopoverRef<T = any> {
-  private afterClosedSubject = new Subject<T>();
-  private selectionChangedSubject = new Subject<T>();
+  private popoverClosedSubject$ = new Subject<T>();
+  private selectionChangedSubject$ = new Subject<T>();
   private currentSelection!:any;
 
   constructor(private overlayRef: OverlayRef,
@@ -33,16 +33,16 @@ export class PopoverRef<T = any> {
   // To close the popover
   close(): void {
     if (this.currentSelection) {
-      this.afterClosedSubject.next(this.currentSelection);
+      this.popoverClosedSubject$.next(this.currentSelection);
     }
 
-    this.afterClosedSubject.complete();
+    this.popoverClosedSubject$.complete();
     this.overlayRef.dispose();
   }
 
   // An observable which can subscribed to when the popover is closed
-  afterClosed(): Observable<T> {
-    return this.afterClosedSubject.asObservable();
+  popoverClosed(): Observable<T> {
+    return this.popoverClosedSubject$.asObservable();
   }
 
   positionChanges(): Observable<ConnectedOverlayPositionChange> {
@@ -50,13 +50,13 @@ export class PopoverRef<T = any> {
   }
 
   // API a custom component will call when the state of the custom component has changed
-  selectionChanged(value: any) {
+  updateValue(value: any) {
     this.currentSelection = value;
-    this.selectionChangedSubject.next(value);
+    this.selectionChangedSubject$.next(value);
   }
 
   // An observable which can subscribed to when the state of the custom component has changed
-  selectionChanges(): Observable<T> {
-    return this.selectionChangedSubject.asObservable();
+  selectionChanged(): Observable<T> {
+    return this.selectionChangedSubject$.asObservable();
   }
 }

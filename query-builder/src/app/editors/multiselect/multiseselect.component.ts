@@ -20,6 +20,6 @@ export class MultiSelectComponent {
 
   updateValue() {
     this.selections = new Date().getTime();
-    this.popoverRef.selectionChanged(this.selections);
+    this.popoverRef.updateValue(this.selections);
   }
 }

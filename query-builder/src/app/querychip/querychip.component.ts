@@ -104,11 +104,11 @@ export class QuerychipComponent implements OnChanges {
           }
         });
 
-        popoverRef.selectionChanges().subscribe(value => {
+        popoverRef.selectionChanged().subscribe(value => {
           this.currentSelection = value;
         });
 
-        popoverRef.afterClosed()
+        popoverRef.popoverClosed()
         .subscribe(result => {
           if (typeof result === 'object' && result !== null) {
             const cloneResult = Object.assign({}, result);
