@@ -9,12 +9,14 @@ import { PopoverConfig } from './popover-config';
  */
 export class PopoverRef<T = any> {
   private afterClosedSubject = new Subject<T>();
-  selectionChangedSubject = new Subject<T>();
+  private selectionChangedSubject = new Subject<T>();
   private currentSelection!:any;
 
   constructor(private overlayRef: OverlayRef,
               private positionStrategy: FlexibleConnectedPositionStrategy,
               public config: PopoverConfig) {
+
+
     if (!config.disableClose) {
       this.overlayRef.backdropClick().subscribe(() => {
         this.close();
@@ -28,6 +30,7 @@ export class PopoverRef<T = any> {
     }
   }
 
+  // To close the popover
   close(): void {
     if (this.currentSelection) {
       this.afterClosedSubject.next(this.currentSelection);
@@ -37,6 +40,7 @@ export class PopoverRef<T = any> {
     this.overlayRef.dispose();
   }
 
+  // An observable which can subscribed to when the popover is closed
   afterClosed(): Observable<T> {
     return this.afterClosedSubject.asObservable();
   }
@@ -45,8 +49,14 @@ export class PopoverRef<T = any> {
     return this.positionStrategy.positionChanges;
   }
 
+  // API a custom component will call when the state of the custom component has changed
   selectionChanged(value: any) {
     this.currentSelection = value;
     this.selectionChangedSubject.next(value);
+  }
+
+  // An observable which can subscribed to when the state of the custom component has changed
+  selectionChanges(): Observable<T> {
+    return this.selectionChangedSubject.asObservable();
   }
 }

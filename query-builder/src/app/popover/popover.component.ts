@@ -15,7 +15,45 @@ import { PopoverRef } from './popover-ref';
     <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
     <div class="arrow" popoverArrow></div>
   `,
-  styleUrls: ['./popover.component.scss']
+  styles: [`
+    :host {
+      position: relative;
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .arrow {
+      position: absolute;
+      background: inherit;
+      z-index: -1;
+    }
+
+    :host-context(.center) .arrow {
+      left: 50%;
+    }
+
+    :host-context(.top.left, .top.center) .arrow {
+      transform-origin: top left;
+      transform: rotate(45deg);
+    }
+
+    :host-context(.top.right) .arrow {
+      transform-origin: top right;
+      transform: rotate(-45deg);
+    }
+
+    :host-context(.bottom.left, .bottom.center) .arrow {
+      transform-origin: bottom left;
+      transform: rotate(-45deg);
+    }
+
+    :host-context(.bottom.right) .arrow {
+      transform-origin: bottom right;
+      transform: rotate(45deg);
+    }
+  `
+  ]
 })
 export class PopoverComponent implements AfterViewInit {
 

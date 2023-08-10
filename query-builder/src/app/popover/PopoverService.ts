@@ -23,7 +23,7 @@ const defaultConfig: PopoverConfig = {
 export class PopoverService {
   constructor(private overlay: Overlay, private injector: Injector) { }
 
-  open<D = any>(componentOrTemplate: ComponentType<any>, target: ElementRef | HTMLElement, config: Partial<PopoverConfig> = {}): PopoverRef<D> {
+  open<D = any>(component: ComponentType<any>, target: ElementRef | HTMLElement, config: Partial<PopoverConfig> = {}): PopoverRef<D> {
     const popoverConfig: PopoverConfig = Object.assign({}, defaultConfig, config);
 
     const arrowSize = popoverConfig.arrowSize ? popoverConfig.arrowSize : 20;
@@ -125,7 +125,7 @@ export class PopoverService {
 
     popover.attachComponentPortal(
       new ComponentPortal(
-        componentOrTemplate,
+        component,
         null,
         portalInjector
       )
