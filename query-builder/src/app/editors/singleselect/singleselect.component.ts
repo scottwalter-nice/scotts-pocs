@@ -63,6 +63,6 @@ export class SingleSelectComponent {
     } else {
       this.data.selectedValue = undefined;
     }
-    this.popoverRef.close();
+    //this.popoverRef.close();
   }
 }
