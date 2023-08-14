@@ -6,6 +6,9 @@ import { COMPONENT_REGISTRY } from './component-registry';
   template: `
     <app-querybuilder [queryComponentDefinitions]="queryComponents" [model]="model"></app-querybuilder>
 
+    <div class="model-value">
+      {{ model | json }}
+    </div>
   `,
   styleUrls: ['./app.component.scss']
 })
