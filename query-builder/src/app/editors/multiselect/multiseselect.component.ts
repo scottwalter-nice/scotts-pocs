@@ -8,6 +8,7 @@ import { POPOVER_DATA } from '../../popover/PopoverService';
     <sol-dropdown
     ariaLabel="test"
     ariaLabelledBy="other"
+    [isInPopover]="true"
     [options]="users"
     optionsValue="value"
     optionsLabel="label"
