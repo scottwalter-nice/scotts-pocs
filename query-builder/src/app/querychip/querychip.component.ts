@@ -32,6 +32,10 @@ import { PopoverService } from '../popover/PopoverService';
       padding: 0px 8px;
       align-items: center;
       gap: 8px;
+      text-overflow: ellipsis;
+      max-width: 150px;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     .chip-operator {
@@ -40,6 +44,10 @@ import { PopoverService } from '../popover/PopoverService';
       padding: 0px 8px;
       align-items: center;
       gap: 4px;
+      text-overflow: ellipsis;
+      max-width: 100px;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     .chip-value {
@@ -48,8 +56,14 @@ import { PopoverService } from '../popover/PopoverService';
       padding: 0px 8px;
       align-items: center;
       gap: 4px;
-      background: var(--global-state-inactive-text, #3F5C69);
       min-width: 20px;
+      span {
+        max-width: 150px;
+        text-overflow: ellipsis;
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+      }
     }
   `]
 })

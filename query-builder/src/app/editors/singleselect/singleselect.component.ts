@@ -8,7 +8,6 @@ import { DropdownComponent } from 'nice-solaris-ngx/dropdown';
 @Component({
   selector: 'app-singleselect',
   template: `
-    <button style="float: right;" (click)="close()">×</button>
     <sol-dropdown
         ariaLabel="test"
         ariaLabelledBy="other"
@@ -17,7 +16,6 @@ import { DropdownComponent } from 'nice-solaris-ngx/dropdown';
         optionsLabel="label"
         [isMultiple]="false"
         [isVirtual]="false"
-        [label]="'Label'"
         [disabled]="false"
         [placeholder]="'Select a team'"
         [(selection)]="selection"

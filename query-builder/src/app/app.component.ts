@@ -45,6 +45,12 @@ export class AppComponent {
       id: 'users',
       componentName: 'multiSelect',
       description: 'Users'
+    },
+    {
+      // id: 1,
+      id: 'timestamp',
+      componentName: 'timestampGenerator',
+      description: 'Long Number'
     }
   ];
 }

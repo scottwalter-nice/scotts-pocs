@@ -23,12 +23,18 @@ export class QuerybuilderComponent implements OnInit{
 
   @Input()
   queryComponentDefinitions!: any[];
+  filtersAll: any[] = [];
+  filtersAvailableToAdd: any[] = [];
 
   @Input()
   model!: any;
 
   ngOnInit(): void {
     console.debug('component definitions', this.queryComponentDefinitions);
+    this.filtersAll = [...this.queryComponentDefinitions];
+    console.log(this.queryComponentDefinitions);
+    console.log(this.filtersAll);
+    this.updateAvailableFiltersToAdd();
   }
 
   onChange(target: any) {
@@ -39,7 +45,19 @@ export class QuerybuilderComponent implements OnInit{
     const componentId = target?.target?.value;
     const queryComponentDefinition= this.queryComponentDefinitions.find(item  => item.id === componentId)
     const compRef = COMPONENT_REGISTRY.find( item => item.name === queryComponentDefinition.componentName);
+
     this.addChip(QuerychipComponent, queryComponentDefinition, compRef);
+  }
+
+  addFilterById(filterId: string) {
+    setTimeout( () => {
+      const queryComponentDefinition= this.queryComponentDefinitions.find(item  => item.id === filterId);
+      const compRef = COMPONENT_REGISTRY.find( item => item.name === queryComponentDefinition.componentName);
+      this.addChip(QuerychipComponent, queryComponentDefinition, compRef);
+      const filter = this.filtersAll.find( item => item.id === filterId);
+      filter._added = true;
+      this.updateAvailableFiltersToAdd();
+    },1);
   }
 
   addChip(component: any, queryComponentDefinition:any, compRef:any) {
@@ -85,6 +103,9 @@ export class QuerybuilderComponent implements OnInit{
           if (indexToRemove > -1) {
             this.model.splice(indexToRemove, 1)
           }
+          const filter = this.filtersAll.find( item => item.id === filterId);
+          filter._added = false;
+          this.updateAvailableFiltersToAdd();
 
           break;
         }
@@ -94,7 +115,15 @@ export class QuerybuilderComponent implements OnInit{
     });
   }
 
-
+  updateAvailableFiltersToAdd() {
+    let availableFilters: any[] = [];
+    this.filtersAll.forEach( (filter) => {
+      if (!filter._added) {
+        availableFilters.push(filter);
+      }
+    });
+    this.filtersAvailableToAdd = availableFilters;
+  }
 
   parentFun() {
     alert('parent component function.');
