@@ -19,8 +19,12 @@ import { PopoverRef } from './popover-ref';
     :host {
       position: relative;
       background: white;
-      border-radius: 8px;
-      padding: 20px;
+      border-radius: 3px;
+      padding: 0px;
+    }
+
+    :host ::ng-deep mat-menu ::ng-deep .mat-menu-item {
+      border-radius: 3px;
     }
 
     .arrow {

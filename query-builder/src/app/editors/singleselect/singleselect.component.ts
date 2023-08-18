@@ -1,34 +1,25 @@
-import { Component, Inject, Input, Optional, inject } from '@angular/core';
+import { Component, Inject, Input, Optional, ViewChild, inject } from '@angular/core';
 import { PopoverRef } from '../../popover/popover-ref';
 import { POPOVER_DATA } from '../../popover/PopoverService';
 import { ModalService } from 'nice-solaris-ngx/modal';
 import { DropdownComponent } from 'nice-solaris-ngx/dropdown';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 
 @Component({
   selector: 'app-singleselect',
   template: `
-    <sol-dropdown
-        ariaLabel="test"
-        ariaLabelledBy="other"
-        [options]="teams"
-        optionsValue="value"
-        optionsLabel="label"
-        [isMultiple]="false"
-        [isVirtual]="false"
-        [disabled]="false"
-        [placeholder]="'Select a team'"
-        [(selection)]="selection"
-        [(ngModel)]="selection"
-        [required]="false"
-        (selectionChange)="change()"
-        (closed)="close()"
-        >
-      </sol-dropdown>
+    <div style="width: 112px; height: 144px;">
+      <button style="visibility: hidden; position: relative; top: -8px;" mat-button #hiddenTrigger="matMenuTrigger" [matMenuTriggerFor]="menu">Hidden</button>
+      <mat-menu #menu="matMenu" [overlapTrigger]="true" (closed)="close()">
+        <button mat-menu-item *ngFor="let c of teams" (click)="change(c.value)" >{{c.label}}</button>
+      </mat-menu>
+    </div>
   `,
   styles: ['']
 })
 export class SingleSelectComponent {
+  @ViewChild('hiddenTrigger') hiddenTrigger!: MatMenuTrigger;
 
   @Input()
   componentConfig: any;
@@ -37,8 +28,7 @@ export class SingleSelectComponent {
   model: any;
   placeholder: any;
   selection: any;
-  teams = [
-  ];
+  teams: any[];
 
   static operator = [];
 
@@ -50,11 +40,18 @@ export class SingleSelectComponent {
     this.teams = this.data.componentConfig.items;
   }
 
+  ngAfterViewInit() {
+    setTimeout( () => {
+      this.hiddenTrigger.openMenu();
+    },1);
+  }
+
   close() {
     this.popoverRef.close();
   }
 
-  change() {
+  change(val: any) {
+    this.selection = val;
     this.popoverRef.updateValue(this.selection);
   }
 }

@@ -1,14 +1,19 @@
-import { Component, Inject, Optional, inject } from '@angular/core';
+import { Component, Inject, Input, Optional, inject } from '@angular/core';
 import { PopoverRef } from '../../popover/popover-ref';
 import { POPOVER_DATA } from '../../popover/PopoverService';
 
 @Component({
   selector: 'app-timestamp-generator',
   template: `
-    <p>Value {{selection}}</p>
-    <button (click)="updateValue()">Update Value</button>
+    <div>
+      <p>Value {{selection}}</p>
+      <button (click)="updateValue()">Update Value</button>
+    </div>
   `,
-  styles: ['']
+  styles: [`
+    div {padding: 20px;}
+    p {margin-top: 0;}
+  `]
 })
 export class TimestampGeneratorComponent {
 

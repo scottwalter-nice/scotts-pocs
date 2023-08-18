@@ -7,11 +7,11 @@ import { PopoverService } from '../popover/PopoverService';
   template: `
     <div class="chip-container">
       <div class="chip-title">{{label}}</div>
-      <div class="chip-operator">Operator</div>
       <div class="chip-value">
           <span [attr.query-component]="definition.componentName" (click)="showPopover($event.target)">
-            <ng-container *ngIf="model">{{currentSelection | json}}</ng-container>
-           ⌄</span>
+            <ng-container *ngIf="currentSelection">{{currentSelection | json}}</ng-container>
+            <ng-container *ngIf="!currentSelection">Select…</ng-container>
+          ⌄</span>
       </div>
       <button (click)="deleteChip()">×</button>
     </div>
