@@ -8,7 +8,6 @@ import { filter, switchMap, tap } from 'rxjs';
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [FormsModule],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -28,7 +27,6 @@ export class PostComponent {
 
   constructor() {
     effect(() => console.log('effect postId', this.postId()));
-    console.log(this.postId);
   }
 
   post = toSignal(
