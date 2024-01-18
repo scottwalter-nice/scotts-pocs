@@ -1,0 +1,11 @@
+<p>post works!</p>
+
+Post Id computed: {{ postIdComputed() }}
+
+@if ( post())  {
+  <h1>Post</h1>
+  <p>{{ post()!.title }}</p>
+  <p>{{ post()!.body }}</p>
+}
+
+
