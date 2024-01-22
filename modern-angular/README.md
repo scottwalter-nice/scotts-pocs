@@ -3,6 +3,9 @@
 - Pass router parameters into Component Inputs
 - Lazy lazy component from routes
 - Signal and Observable integration
+- Signal Inputs
+- Signal Computed
+- Signal Effects
 - Signal alias for input
 - @if
 
