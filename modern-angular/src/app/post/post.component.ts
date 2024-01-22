@@ -3,6 +3,8 @@ import { ChangeDetectionStrategy, Component, inject, input, numberAttribute, sig
 import { toObservable, toSignal } from '@angular/core/rxjs-interop'
 import { filter, switchMap, tap } from 'rxjs';
 
+import { computedAsync } from 'ngxtension/computed-async';
+
 
 @Component({
   selector: 'app-post',
@@ -40,17 +42,24 @@ export class PostComponent {
 
   post = this.showPost();
 
+  // showPost() {
+  //   return toSignal(
+  //     toObservable(this.internalPostId).pipe(
+  //       tap((id) => console.log('observable integration', id)),
+  //       filter((id) => !!id), // this is necessary because initially postId will be null
+  //       switchMap((id) =>
+  //         this.http.get<any>(`https://jsonplaceholder.typicode.com/posts/${id}`)
+  //       )
+  //     )
+  //   , { initialValue: null }
+  //   );
+  // }
+
   showPost() {
-    return toSignal(
-      toObservable(this.internalPostId).pipe(
-        tap((id) => console.log('tap id', id)),
-        filter((id) => !!id), // this is necessary because initially postId will be null
-        switchMap((id) =>
-          this.http.get<any>(`https://jsonplaceholder.typicode.com/posts/${id}`)
-        )
-      )
-    , { initialValue: null }
-    );
+    return computedAsync(() => {
+      console.log('computedAsync postId', this.internalPostId());
+      return this.http.get<any>(`https://jsonplaceholder.typicode.com/posts/${this.internalPostId()}`);
+    });
   }
 
   randomPost() {
