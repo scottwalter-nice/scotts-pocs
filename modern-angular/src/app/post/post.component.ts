@@ -25,13 +25,16 @@ export class PostComponent {
   });
 
   constructor() {
-    effect(() => {
+    effect((onCleanup) => {
       console.log('effect postId', this.postId())
 
       untracked(() => {
         this.internalPostId.set(this.postId());
       });
 
+      onCleanup(() => {
+        console.log('cleanup postId', this.postId())
+      });
     });
   }
 
