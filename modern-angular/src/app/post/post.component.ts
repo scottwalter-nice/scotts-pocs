@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, inject, input, numberAttribute, signal, effect, computed, ɵINPUT_SIGNAL_BRAND_WRITE_TYPE, untracked } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, numberAttribute, signal, effect, computed, ɵINPUT_SIGNAL_BRAND_WRITE_TYPE, untracked, Input } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop'
 import { filter, switchMap, tap } from 'rxjs';
 
@@ -13,7 +13,10 @@ import { filter, switchMap, tap } from 'rxjs';
 })
 export class PostComponent {
   private readonly http = inject(HttpClient);
-  postId = input.required<number, unknown>({transform: numberAttribute, alias: 'id' })
+
+  postId = input.required<number, unknown>({transform: numberAttribute, alias: 'id' });
+  @Input() message = '';
+
   internalPostId = signal(0);
 
   postIdComputed = computed(() => {
