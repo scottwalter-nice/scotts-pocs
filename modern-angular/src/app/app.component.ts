@@ -12,6 +12,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     <ul>
       <li><a [routerLink]="'home'">Home</a></li>
       <li><a [routerLink]="['/post/', '1']" [queryParams]="{message: 'Hello World'}">Posts</a></li>
+      <li><a [routerLink]="'signalstore'">Signal Store</a></li>
     </ul>
 
     <router-outlet />

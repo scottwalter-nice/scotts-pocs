@@ -11,6 +11,10 @@ export const routes: Routes = [
     component: PostComponent,
   },
   {
+    path: 'signalstore',
+    loadComponent: () => import('./signal-store/signal-store.component').then(mod => mod.SignalStoreComponent)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
@@ -18,5 +22,5 @@ export const routes: Routes = [
   {
     path: '**',
     redirectTo: 'home',
-  },
+  }
 ];
