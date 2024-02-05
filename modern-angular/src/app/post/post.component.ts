@@ -4,17 +4,23 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop'
 import { filter, switchMap, tap } from 'rxjs';
 
 import { computedAsync } from 'ngxtension/computed-async';
+import { Router } from '@angular/router';
+import { JsonPipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-post',
   standalone: true,
+  imports: [JsonPipe],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostComponent {
   private readonly http = inject(HttpClient);
+  private router = inject(Router);
+
+  extraInfo:any;
 
   postId = input.required<number, unknown>({transform: numberAttribute, alias: 'id' });
   @Input() message = '';
@@ -27,6 +33,9 @@ export class PostComponent {
   });
 
   constructor() {
+
+    console.log('boo', this.router.getCurrentNavigation()!.extras);
+    this.extraInfo = this.router.getCurrentNavigation()!.extras;
     effect((onCleanup) => {
       console.log('effect postId', this.postId())
 

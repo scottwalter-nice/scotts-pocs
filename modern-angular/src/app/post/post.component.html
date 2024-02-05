@@ -2,8 +2,9 @@
 <h2>Internal Post Id: {{ internalPostId() }} </h2>
 <h2>Post Id Computed: {{ postIdComputed() }}</h2>
 <h2>Message from route link: {{message}}</h2>
-
+<h2>Additional Info: {{extraInfo | json}}</h2>
 <button (click)="randomPost()">Random Post</button>
+
 
 @if ( post())  {
   <p>{{ post()!.title }}</p>
