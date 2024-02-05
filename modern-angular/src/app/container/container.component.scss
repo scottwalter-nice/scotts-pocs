@@ -1,0 +1,11 @@
+@use 'sass:meta';
+
+.container-only {
+  @include meta.load-css('./container-shared.scss');
+
+  & {
+    background-color: red;
+  }
+}
+
+
