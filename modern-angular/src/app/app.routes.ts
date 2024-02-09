@@ -15,6 +15,10 @@ export const routes: Routes = [
     loadComponent: () => import('./signal-store/signal-store.component').then(mod => mod.SignalStoreComponent)
   },
   {
+    path: 'myform',
+    loadComponent: () => import('./myform/myform.component').then(mod => mod.MyformComponent)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',

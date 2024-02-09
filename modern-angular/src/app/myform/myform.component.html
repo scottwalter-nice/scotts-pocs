@@ -1,0 +1,18 @@
+<h2>{{version}}</h2>
+
+<h2>Name</h2>
+<input type="text" [(ngModel)]="name" />
+{{name}}
+<button (click)="changeName()">Change Name</button>
+
+<h2>Signal Name</h2>
+<input type="text" [(ngModel)]="signalName" />
+{{ signalName()}}
+<button (click)="changeSignalName()">Change Signal Name</button>
+
+<h2>Model Name</h2>
+<input type="text" [(ngModel)]="modelName" />
+<button (click)="changeModelName()">Change Model Name</button>
+Selected value: {{modelName()}}
+
+<button (click)="oops()">Test</button>

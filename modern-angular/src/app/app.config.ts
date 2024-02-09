@@ -7,4 +7,5 @@ import { demoInterceptor } from './demo-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withComponentInputBinding()), provideHttpClient(withInterceptors([demoInterceptor]))]
+  // providers: [provideRouter(routes), provideHttpClient(withInterceptors([demoInterceptor]))]
 };
