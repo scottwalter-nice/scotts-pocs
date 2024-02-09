@@ -1,11 +1,12 @@
 import { AfterViewInit, Component, ViewChild, ViewEncapsulation, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ContainerComponent } from '../container/container.component';
+import { MyformComponent } from '../myform/myform.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule, ContainerComponent],
+  imports: [RouterModule, ContainerComponent, MyformComponent],
   encapsulation: ViewEncapsulation.None,
   template: `
     <h2>You are home!</h2>
@@ -14,6 +15,8 @@ import { ContainerComponent } from '../container/container.component';
     <button (click)="goPost()">Go to Post 20</button>
 
     <app-container></app-container>
+
+    <app-myform modelName="fred"></app-myform>
 
   `,
   styleUrl: './home.component.scss'

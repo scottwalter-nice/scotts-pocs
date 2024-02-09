@@ -18,7 +18,7 @@ export class MyformComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.modelName.set('Model Scott');
+    // this.modelName.set('Model Scott');
   }
 
   changeName() {
