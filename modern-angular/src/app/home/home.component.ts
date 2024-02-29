@@ -4,14 +4,18 @@ import { ContainerComponent } from '../container/container.component';
 import { MyformComponent } from '../myform/myform.component';
 import { DecimalPipe } from '@angular/common';
 import { MessageComponent } from '../message/message.component';
+import { Service1 } from '../service1';
+import { CoolDirectiveDirective } from '../cool-directive.directive';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule, ContainerComponent, MyformComponent, DecimalPipe, MessageComponent],
+  imports: [RouterModule, ContainerComponent, MyformComponent, DecimalPipe, MessageComponent, CoolDirectiveDirective],
   encapsulation: ViewEncapsulation.ShadowDom,
   template: `
-    <h2>You are home!</h2>
+
+    <div appCoolDirective>Hello Dynamic Directive</div>
+    <h2>You are home! {{myname}}</h2>
     <h3>{{ num | number }}</h3>
     <a routerLink="/post/20" [info]="linkInfo">Go to Post 20</a>
 
@@ -39,6 +43,12 @@ export class HomeComponent implements AfterViewInit{
   linkInfo = {name: 'Yoda', age: 900};
 
   placeholder = viewChild('placeholder', { read: ViewContainerRef });
+
+  myname:string = '';
+
+  constructor(private service1: Service1) {
+    this.myname = service1.getName();
+  }
 
 
   goPost() {

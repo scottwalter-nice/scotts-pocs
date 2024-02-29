@@ -19,6 +19,10 @@ export const routes: Routes = [
     loadComponent: () => import('./myform/myform.component').then(mod => mod.MyformComponent)
   },
   {
+    path: 'tabs',
+    loadComponent: () => import('./tabs/tabs.component').then(mod => mod.TabsComponent)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
