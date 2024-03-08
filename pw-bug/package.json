@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "rm -rf node_modules && rm -rf package-lock.json && npm install && npx playwright install chromium && npx playwright test"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "1.43.0-beta-1709675102000",
+    "@playwright/test": "1.42.1",
     "@types/node": "^20.11.25"
   }
 }
