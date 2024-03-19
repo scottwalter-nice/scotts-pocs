@@ -1,0 +1,11 @@
+	Fredgrape
+	Fred
+	Fredgrape
+	Fredgrape
+	Fredfunction hello() {
+	Fred	console.log('hello');
+	Fred}
+Fred
+Fred
+
+(d, e, f)

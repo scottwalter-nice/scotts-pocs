@@ -30,6 +30,11 @@ const config:PlaywrightTestConfig = {
     trace: 'on-first-retry',
   },
 
+  reporter: [
+    ['list', {printSteps: true}],
+    //['./myreporter.ts']
+  ],
+
   /* Configure projects for major browsers */
   projects: [
     {
