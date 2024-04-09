@@ -11,15 +11,21 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 
     <ul>
       <li><a [routerLink]="'home'">Home</a></li>
-      <li><a [routerLink]="['/post/', '1']" [queryParams]="{message: 'Hello World'}">Posts</a></li>
+      <li>
+        <a
+          [routerLink]="['/post/', '1']"
+          [queryParams]="{ message: 'Hello World' }"
+          >Posts</a
+        >
+      </li>
       <li><a [routerLink]="'signalstore'">Signal Store</a></li>
       <li><a [routerLink]="'myform'">My Form</a></li>
       <li><a [routerLink]="'tabs'">Tabs</a></li>
+      <li><a [routerLink]="'dynamic'">Dynamic</a></li>
     </ul>
 
     <router-outlet />
   `,
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
-export class AppComponent {
-}
+export class AppComponent {}

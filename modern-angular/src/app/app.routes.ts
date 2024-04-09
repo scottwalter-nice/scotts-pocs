@@ -4,7 +4,8 @@ import { PostComponent } from './post/post.component';
 export const routes: Routes = [
   {
     path: 'home',
-    loadComponent: () => import('./home/home.component').then(mod => mod.HomeComponent)
+    loadComponent: () =>
+      import('./home/home.component').then((mod) => mod.HomeComponent),
   },
   {
     path: 'post/:id',
@@ -12,15 +13,25 @@ export const routes: Routes = [
   },
   {
     path: 'signalstore',
-    loadComponent: () => import('./signal-store/signal-store.component').then(mod => mod.SignalStoreComponent)
+    loadComponent: () =>
+      import('./signal-store/signal-store.component').then(
+        (mod) => mod.SignalStoreComponent,
+      ),
   },
   {
     path: 'myform',
-    loadComponent: () => import('./myform/myform.component').then(mod => mod.MyformComponent)
+    loadComponent: () =>
+      import('./myform/myform.component').then((mod) => mod.MyformComponent),
   },
   {
     path: 'tabs',
-    loadComponent: () => import('./tabs/tabs.component').then(mod => mod.TabsComponent)
+    loadComponent: () =>
+      import('./tabs/tabs.component').then((mod) => mod.TabsComponent),
+  },
+  {
+    path: 'dynamic',
+    loadComponent: () =>
+      import('./dynamic/dynamic.component').then((mod) => mod.DynamicComponent),
   },
   {
     path: '',
@@ -30,5 +41,5 @@ export const routes: Routes = [
   {
     path: '**',
     redirectTo: 'home',
-  }
+  },
 ];
