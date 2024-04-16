@@ -1,0 +1,24 @@
+<div class="conversation-container">
+  <div class="cards">
+  </div>
+  <div class="prompt">
+    <button (click)="addCard()">Add A Card</button>
+  </div>
+</div>
+
+@for (item of cardData; track item) {
+  <ng-template class="cool" #el>
+    I am very dynamic aren't eye again?  {{ cardData[$index].now }}
+      <ng-template [contentA]>
+        FFFFFFFFFFFFFFFFFF
+      </ng-template>
+  </ng-template>
+}
+
+<hr>
+<h2>Single Card</h2>
+<conversation-card [template]="singleCard" (onButtonClicked)="singleCardButtonClicked()"></conversation-card>
+
+<ng-template class="cool" #singleCard>
+  The quick brown fox jumps over the lazy dog
+</ng-template>

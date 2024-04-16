@@ -1,0 +1,13 @@
+<div class="conversation-card">
+  <ng-content select="conversation-card-header"></ng-content>
+
+  <ng-container
+  *ngIf="carMainContent"
+  [ngTemplateOutlet]="carMainContent.template" ></ng-container>
+
+  <ng-content
+          *ngIf="carMainContent"
+          select="conversation-card-footer"
+        ></ng-content>
+</div>
+

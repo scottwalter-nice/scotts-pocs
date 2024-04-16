@@ -1,0 +1,22 @@
+<div class="conversation-container">
+  <div class="cards">
+    @for (item of cardData; track item) {
+      <conversation-card2>
+        <div *conversationCardMainContent>
+          At the beep the time will be {{item.now}}
+        </div>
+
+        <conversation-card-footer>
+          <button class="btn btn--block card__btn" (click)="updateContent()">Button</button>
+        </conversation-card-footer>
+
+        <conversation-card-header> Header Content </conversation-card-header>
+      </conversation-card2>
+    }
+  </div>
+
+  <div class="prompt">
+    <button (click)="addCard()">Add A Card</button>
+  </div>
+</div>
+

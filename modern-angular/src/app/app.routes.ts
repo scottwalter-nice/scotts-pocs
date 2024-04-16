@@ -34,6 +34,16 @@ export const routes: Routes = [
       import('./dynamic/dynamic.component').then((mod) => mod.DynamicComponent),
   },
   {
+    path: 'conversation',
+    loadComponent: () =>
+      import('./conversation-container/conversation-container.component').then((mod) => mod.ConversationContainerComponent),
+  },
+  {
+    path: 'conversation2',
+    loadComponent: () =>
+      import('./conversation-container2/conversation-container2.component').then((mod) => mod.ConversationContainer2Component),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',

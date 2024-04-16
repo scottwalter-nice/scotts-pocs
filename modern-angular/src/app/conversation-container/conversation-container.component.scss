@@ -1,0 +1,19 @@
+.conversation-container {
+  height: 50vh;
+  width: 30vw;
+
+  .cards {
+    outline: 2px solid blue;
+    height:80%;
+    padding: 2rem;
+    overflow-y: auto
+  }
+
+  .prompt {
+    outline: 2px solid hotpink;
+    padding: 1rem;
+  }
+}
+
+
+

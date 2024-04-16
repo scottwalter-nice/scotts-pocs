@@ -22,6 +22,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
       <li><a [routerLink]="'myform'">My Form</a></li>
       <li><a [routerLink]="'tabs'">Tabs</a></li>
       <li><a [routerLink]="'dynamic'">Dynamic</a></li>
+      <li><a [routerLink]="'conversation'">Let's have a conversation.  Shall you?</a></li>
+      <li><a [routerLink]="'conversation2'">Let's have a conversation2.  Shall you?</a></li>
     </ul>
 
     <router-outlet />

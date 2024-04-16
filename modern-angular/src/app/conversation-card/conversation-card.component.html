@@ -1,0 +1,16 @@
+<div class="conversation-card">
+  Hello Randy
+
+  <ng-content></ng-content>
+  <ng-content select=".second"></ng-content>
+  <ng-content select=".cool"></ng-content>
+
+  <ng-container *ngTemplateOutlet="template">
+
+
+  </ng-container>
+  <ng-content select="[contentA]"></ng-content>
+
+  <button (click)="onClick()">Click me</button>
+</div>
+
