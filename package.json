@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@niceltd/sol": "file:../../libs/sol-components/dist/sol/niceltd-sol-6.0.0.tgz"
+  }
+}
