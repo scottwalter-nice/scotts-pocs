@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { bob7, bob8 } from 'bob';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,5 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'sol-poc';
+  name = 'anakin skywalker';
 }
