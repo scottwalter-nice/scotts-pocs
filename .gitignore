@@ -132,3 +132,6 @@ dist
 # System files
 .DS_Store
 Thumbs.db
+
+**/accessibility-tree*.json
+a11y/screenshot.png
